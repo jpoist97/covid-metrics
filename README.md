@@ -1,7 +1,7 @@
 # Covid-Metrics
-> Simple Vue.js Webpage used to display daily metrics on the number of COVID-19 cases in the United States according to the CDC.
+> Displays daily metrics on COVID-19 cases in the United States.
 
-One to two paragraph statement about your product and what it does.
+Vue.js webpage that displays daily metrics on COVID-19 cases in the United States as reported by the CDC. The repository is brocken into the following two folders.
 
 ## aws-lambda
 
