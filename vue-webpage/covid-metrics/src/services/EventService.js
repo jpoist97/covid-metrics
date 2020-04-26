@@ -5,10 +5,10 @@ const apiClient = axios.create({
 })
 
 export default{
-    getMetrics(date, hour){
-        return apiClient.get(`/gmail/metrics?date=${ date }&hour=${ hour }`);
-    },
     getDailyMetrics(date){
-        return apiClient.get(`/gmail/metrics?date=${ date }`);
+        return apiClient.get(`/covid/metrics?date=${ date }`);
+    },
+    getAllMetrics(){
+        return apiClient.get(`/covid/metrics`);
     }
 }

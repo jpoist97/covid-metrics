@@ -2,8 +2,9 @@
 
   <div id="home">
     <b-container>
-      <h1>Twitter Metrics</h1>
+      <h1>Covid-19 Metrics</h1>
       <MetricGraph/>
+      
     </b-container>
 
   </div>
@@ -38,6 +39,16 @@ h1{
   width: fit-content;
   /* text-decoration: underline;
   text-decoration-color: #d52941 */
-  border-bottom: 3px solid #23b5d3
+  border-bottom: 3px solid #fcab64
+}
+p{
+  padding-top: 25px;
+  text-align: center;
+  color: #eeeeee;
+  width: fit-content;
+  margin: 0 auto;
+  /* text-decoration: underline;
+  text-decoration-color: #d52941 */
+  /* border-bottom: 3px solid #23b5d3 */
 }
 </style>

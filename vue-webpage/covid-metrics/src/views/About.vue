@@ -2,15 +2,10 @@
   <div class="about">
       <h1>About this webpage</h1>
       <p>
-        This webpage displays real time metrics about the tweets sent from four selected Twitter accounts. 
-        The numbers are displayed in an hourly format, for example if a data point on the "@KingJames" graph is:
+        This webpage displays daily metrics on the number of Covid-19 cases in the United States. All statistics are pulled from 
+        <a href="https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/cases-in-us.html?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fcoronavirus%2F2019-ncov%2Fcases-in-us.html">cdc.gov</a>. 
+        I pull data about every hour to update my database. 
       </p>
-      <div class="example-label">
-        Tweets: 3 <br>
-        Date: Sat Apr 11, 2020 <br>
-        Time: 6PM
-      </div>
-      <p>That means that on April 11th, between the hours of 5PM and 6PM, @KingJames tweeted 3 times from their account.</p>
       <h1>Purpose</h1>
       <p>
         If you've seen my gmail-metrics webpage, you'll notice this page is very similar. The purpose of this project was to
@@ -20,7 +15,7 @@
 
       <h1>AWS Lambda Function</h1>
       <p>In order to get the metrics I wanted to display on this website, I used an AWS Lambda function
-        written in Javascript to access the Twitter API. After I got the metrics from the Twitter API, my lambda
+        written in Javascript to access the an API for statistics on Covid-19 cases. After I got the metrics from the API, my lambda
         function stored those metrics into a DynamoDB table.
       </p>
       <h1>Node.js/Express Endpoint</h1>
@@ -28,7 +23,7 @@
         web application. To do this I wrote a Node.js service that would query the DynamoDB table for metrics
         given proper query parameters. To access this service, I used Express to deploy a simple web server 
         to act as an endpoint for my Node.js service. I deployed the service to AWS using AWS Elastic Beanstalk.
-        You can access the enpoint itself by going to <a href="http://metricsapi-env.eba-3e3yt2se.us-west-1.elasticbeanstalk.com/">metrics-api</a>
+        You can access the enpoint itself by going to <a href="http://metricsapi-env.eba-3e3yt2se.us-west-1.elasticbeanstalk.com/">metrics-api</a>.
       </p>
       <h1>Vue.js Webpage</h1>
       <p>To tie it all together and display the metrics I was gathering, I built a Vue.js webpage. I used Vuex
@@ -56,19 +51,13 @@ h5{
   color: #eeeeee;
   text-align: left;
   width: fit-content;
-  border-bottom: 3px solid #23b5d3;
+  border-bottom: 3px solid #fcab64;
 }
 
 p{
   color: #eeeeee;
   text-align: left;
   font-size: 16px;
-}
-
-.example-label{
-  color: #eeeeee;
-  text-align: left;
-  margin-bottom: 10px;
 }
 
 .icon-row{
@@ -90,10 +79,8 @@ img{
 .about{
   margin: 0 auto;
   width: 75%;
+  padding-bottom: 20px;
 }
 
-#lambda-icon{
-  padding: 16px;
-}
 
 </style>

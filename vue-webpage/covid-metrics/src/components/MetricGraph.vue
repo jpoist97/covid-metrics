@@ -5,17 +5,9 @@
             <div class="loading-text">Loading Metrics...</div>
         </div>
         <div v-else>
-            <highcharts :options="graphOptions[graphIndex]"/>
-            <div>
-                <button class="graph-button" :class="{ 'active-btn': graphIndex === 0 }" v-on:click="graphIndex=0">@FoxNews</button>
-                <button class="graph-button" :class="{ 'active-btn': graphIndex === 1 }" v-on:click="graphIndex=1">@CNN</button>
-                <button class="graph-button" :class="{ 'active-btn': graphIndex === 2 }" v-on:click="graphIndex=2">@KingJames</button>
-                <button class="graph-button" :class="{ 'active-btn': graphIndex === 3 }" v-on:click="graphIndex=3">@PostMalone</button>
-            </div>
+            <highcharts :options="graphOptions"/>
+            <p>This website displays daily figures for the number of Covid-19 cases in the United States. All statistics are pulled from <a href="https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/cases-in-us.html?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fcoronavirus%2F2019-ncov%2Fcases-in-us.html">cdc.gov</a>.</p>
         </div>
-
-
-
     </div>
 </template>
 
@@ -29,26 +21,25 @@ export default {
   },
   data() {
     return{
-        graphIndex: 0,
-        graphOptions:[{
+        graphOptions:{
             chart:{
                 type: 'spline',
                 backgroundColor: '#212121'
             },
             title:{
-                text: 'Tweets by @FoxNews',
+                text: 'Covid-19 Cases in The United States',
                 style: {
                     color: '#eeeeee'
                 }
             },
             series: [{
-                    name: '@FoxNews',
-                    data: this.$store.state.foxNewsData,
+                    name: 'Cases',
+                    data: this.$store.state.covidData,
                 },
             ],
             yAxis: {
                 title: {
-                    text: 'Number of Tweets',
+                    text: 'Number of Cases',
                     style: {
                         color: '#eeeeee'
                     }
@@ -74,7 +65,7 @@ export default {
                 formatter: function() {
                     let d = new Date(0);
                     d.setUTCMilliseconds(this.point.x);
-                    return `Tweets: ${ this.point.y }<br>Date: ${ d.toDateString() }<br>Time: ${ d.toLocaleString('en-US', { hour: 'numeric', hour12: true }) }`
+                    return `Cases: ${ this.point.y }<br>Date: ${ d.toDateString() }`
                 }
             },
             time: {
@@ -82,7 +73,7 @@ export default {
             },
             plotOptions: {
                 series:{
-                    color: '#23b5d3'
+                    color: '#fcab64'
                 }
             },
             legend: {
@@ -91,204 +82,12 @@ export default {
                 }
             }
         },
-        {
-            chart:{
-                type: 'spline',
-                backgroundColor: '#212121'
-            },
-            title:{
-                text: 'Tweets by @CNN',
-                style: {
-                    color: '#eeeeee'
-                }
-            },
-            series: [{
-                    name: '@CNN',
-                    data: this.$store.state.CNNData,
-                },
-            ],
-            yAxis: {
-                title: {
-                    text: 'Number of Tweets',
-                    style: {
-                        color: '#eeeeee'
-                    }
-                },
-                gridLineColor: 'rgba(255, 255, 255, 0.3)',
-                labels: {
-                    style: {
-                        color: '#eeeeee'
-                    }
-                },
-                allowDecimals: false
-            },
-            xAxis: {
-                type: 'datetime',
-                lineColor: 'rgba(255, 255, 255, 0.3)',
-                labels: {
-                    style: {
-                        color: '#eeeeee'
-                    }
-                }
-            },
-            tooltip:{
-                formatter: function() {
-                    let d = new Date(0);
-                    d.setUTCMilliseconds(this.point.x);
-                    return `Tweets: ${ this.point.y }<br>Date: ${ d.toDateString() }<br>Time: ${ d.toLocaleString('en-US', { hour: 'numeric', hour12: true }) }`
-                }
-            },
-            time: {
-                timezoneOffset: new Date().getTimezoneOffset()
-            },
-            plotOptions: {
-                series:{
-                    color: '#23b5d3'
-                }
-            },
-            legend: {
-                itemStyle: {
-                    color: '#eeeeee'
-                }
-            }
-        },
-        {
-            chart:{
-                type: 'spline',
-                backgroundColor: '#212121'
-            },
-            title:{
-                text: 'Tweets by @KingJames',
-                style: {
-                    color: '#eeeeee'
-                }
-            },
-            series: [{
-                    name: '@KingJames',
-                    data: this.$store.state.kingJamesData,
-                },
-            ],
-            yAxis: {
-                title: {
-                    text: 'Number of Tweets',
-                    style: {
-                        color: '#eeeeee'
-                    }
-                },
-                gridLineColor: 'rgba(255, 255, 255, 0.3)',
-                labels: {
-                    style: {
-                        color: '#eeeeee'
-                    }
-                },
-                allowDecimals: false
-            },
-            xAxis: {
-                type: 'datetime',
-                lineColor: 'rgba(255, 255, 255, 0.3)',
-                labels: {
-                    style: {
-                        color: '#eeeeee'
-                    }
-                }
-            },
-            tooltip:{
-                formatter: function() {
-                    let d = new Date(0);
-                    d.setUTCMilliseconds(this.point.x);
-                    return `Tweetss: ${ this.point.y }<br>Date: ${ d.toDateString() }<br>Time: ${ d.toLocaleString('en-US', { hour: 'numeric', hour12: true }) }`
-                }
-            },
-            time: {
-                timezoneOffset: new Date().getTimezoneOffset()
-            },
-            plotOptions: {
-                series:{
-                    color: '#23b5d3'
-                }
-            },
-            legend: {
-                itemStyle: {
-                    color: '#eeeeee'
-                }
-            }
-        },
-        {
-            chart:{
-                type: 'spline',
-                backgroundColor: '#212121'
-            },
-            title:{
-                text: 'Tweets by @PostMalone',
-                style: {
-                    color: '#eeeeee'
-                }
-            },
-            series: [{
-                    name: '@PostMalone',
-                    data: this.$store.state.postMaloneData,
-                },
-            ],
-            yAxis: {
-                title: {
-                    text: 'Number of Tweets',
-                    style: {
-                        color: '#eeeeee'
-                    }
-                },
-                gridLineColor: 'rgba(255, 255, 255, 0.3)',
-                labels: {
-                    style: {
-                        color: '#eeeeee'
-                    }
-                },
-                allowDecimals: false
-            },
-            xAxis: {
-                type: 'datetime',
-                lineColor: 'rgba(255, 255, 255, 0.3)',
-                labels: {
-                    style: {
-                        color: '#eeeeee'
-                    }
-                }
-            },
-            tooltip:{
-                formatter: function() {
-                    let d = new Date(0);
-                    d.setUTCMilliseconds(this.point.x);
-                    return `Tweets: ${ this.point.y }<br>Date: ${ d.toDateString() }<br>Time: ${ d.toLocaleString('en-US', { hour: 'numeric', hour12: true }) }`
-                }
-            },
-            time: {
-                timezoneOffset: new Date().getTimezoneOffset()
-            },
-            plotOptions: {
-                series:{
-                    color: '#23b5d3'
-                }
-            },
-            legend: {
-                itemStyle: {
-                    color: '#eeeeee'
-                }
-            }
-        },
-            ]
         
     }
   },
   created(){
     if(!this.$store.state.completed){
-      let date = new Date();
-      let curDate = date.getDate();
-
-      for(let i = 0; i < 7; i++){
-        date.setDate(curDate);
-        this.$store.dispatch('fetchMetrics', `${ date.getUTCFullYear() }-${ date.getUTCMonth()}-${ date.getUTCDate() }`);
-        curDate = date.getDate() - 1;
-      }
-      
+      this.$store.dispatch('fetchMetrics');
     }
   },
 }
@@ -296,21 +95,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-.graph-button{
-    background-color: #eeeeee;
-    border-radius: 25px;
-    margin: 8px;
-    width: 20%;
-    outline: none;
-}
-
-.active-btn{
-    background-color: #23b5d3;
-    border: 1px solid #23b5d3;
-    outline: none;
-}
-
 
 .loading-text{
     color: #eeeeee;
@@ -330,7 +114,7 @@ export default {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: #23b5d3;
+  background: #fcab64;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {
