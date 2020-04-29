@@ -33,7 +33,8 @@ async function storeMetrics(metric){
         TableName: 'covid-metrics',
         Item:{
             'date': metric.date,
-            'cases': metric.cases
+            'cases': metric.cases,
+            'deaths': metric.deaths
         }
     }
 
@@ -49,18 +50,39 @@ async function getMetrics() {
 
     let metric = [];
 
-    await axios.get('https://api.apify.com/v2/key-value-stores/moxA3Q0aZh5LosewB/records/LATEST?disableRedirect=true')
+    await axios.get(`https://api.covid19api.com/total/dayone/country/united-states`)
         .then(response => {
-            // console.log(response.data);
-            let cases = response.data.casesByDays;
-            let d = new Date(cases[cases.length-1].date);
-            metric.date = `${d.getUTCFullYear()}-${d.getUTCMonth() - 1}-${d.getUTCDate()}`;
-            metric.cases = cases[cases.length-1].value;
+            let d = new Date(response.data[response.data.length-1].Date);
+            let date = `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`;
+            metric= {
+                'date': date,
+                'cases': response.data[response.data.length-1].Confirmed,
+                'deaths': response.data[response.data.length-1].Deaths
+            };
         })
         .catch(error => {
             console.log(error);
         })
 
-    
     return metric;
 }
+
+// async function getMetrics() {
+
+//     let metric = [];
+
+//     await axios.get('https://api.apify.com/v2/key-value-stores/moxA3Q0aZh5LosewB/records/LATEST?disableRedirect=true')
+//         .then(response => {
+//             // console.log(response.data);
+//             let cases = response.data.casesByDays;
+//             let d = new Date(cases[cases.length-1].date);
+//             metric.date = `${d.getUTCFullYear()}-${d.getUTCMonth() - 1}-${d.getUTCDate()}`;
+//             metric.cases = cases[cases.length-1].value;
+//         })
+//         .catch(error => {
+//             console.log(error);
+//         })
+
+    
+//     return metric;
+// }
