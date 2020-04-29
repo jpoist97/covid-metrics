@@ -3,8 +3,8 @@
       <h1>About this webpage</h1>
       <p>
         This webpage displays daily metrics on the number of Covid-19 cases in the United States. All statistics are pulled from 
-        <a href="https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/cases-in-us.html?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fcoronavirus%2F2019-ncov%2Fcases-in-us.html">cdc.gov</a>. 
-        I pull data about every hour to update my database. 
+        <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a>. 
+        I pull data about every hour to update my database. Big thanks to <a href="https://covid19api.com/#details">covid19api</a> written by Kyle Redelinghuys for providing enpoints for me to access COVID-19 data.
       </p>
       <h1>Purpose</h1>
       <p>

@@ -6,7 +6,7 @@
         </div>
         <div v-else>
             <highcharts :options="graphOptions"/>
-            <p>This website displays daily figures for the number of Covid-19 cases in the United States. All statistics are pulled from <a href="https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/cases-in-us.html?CDC_AA_refVal=https%3A%2F%2Fwww.cdc.gov%2Fcoronavirus%2F2019-ncov%2Fcases-in-us.html">cdc.gov</a>.</p>
+            <p>This website displays daily figures for the number of Covid-19 cases in the United States. All statistics are pulled from <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a>. <br> Figures were made accessible by <a href="https://covid19api.com/#details">covid19api</a> written by Kyle Redelinghuys.</p>
         </div>
     </div>
 </template>
@@ -33,13 +33,32 @@ export default {
                 }
             },
             series: [{
+                    name: 'Deaths',
+                    data: this.$store.state.deathData,
+                    tooltip: {
+                      customTooltipPerSeries: function() {
+                          let d = new Date(0);
+                          d.setUTCMilliseconds(this.point.x);
+                          return `Deaths: ${ this.point.y }<br>Date: ${ d.toDateString() }`
+                      }
+                    },
+                    color: '#d52941'
+                },{
                     name: 'Cases',
                     data: this.$store.state.covidData,
+                    tooltip: {
+                      customTooltipPerSeries: function() {
+                          let d = new Date(0);
+                          d.setUTCMilliseconds(this.point.x);
+                          return `Cases: ${ this.point.y }<br>Date: ${ d.toDateString() }`
+                      }
+                    },
+                    color: '#fcab64'
                 },
             ],
             yAxis: {
                 title: {
-                    text: 'Number of Cases',
+                    text: 'Number of Cases/Deaths',
                     style: {
                         color: '#eeeeee'
                     }
@@ -63,18 +82,12 @@ export default {
             },
             tooltip:{
                 formatter: function() {
-                    let d = new Date(0);
-                    d.setUTCMilliseconds(this.point.x);
-                    return `Cases: ${ this.point.y }<br>Date: ${ d.toDateString() }`
+
+                    return this.series.tooltipOptions.customTooltipPerSeries.call(this);
                 }
             },
             time: {
                 timezoneOffset: new Date().getTimezoneOffset()
-            },
-            plotOptions: {
-                series:{
-                    color: '#fcab64'
-                }
             },
             legend: {
                 itemStyle: {
