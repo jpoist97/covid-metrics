@@ -28,3 +28,4 @@ Uses the endpoints given by this web server to get the metrics from DynamoDB int
 Technologies Used:
   * Express
   * Node.js
+  * AWS Elastic Beanstalk
