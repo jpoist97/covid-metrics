@@ -86,9 +86,9 @@ export default {
                     return this.series.tooltipOptions.customTooltipPerSeries.call(this);
                 }
             },
-            time: {
-                timezoneOffset: new Date().getTimezoneOffset()
-            },
+            // time: {
+            //     timezoneOffset: new Date().getTimezoneOffset()
+            // },
             legend: {
                 itemStyle: {
                     color: '#eeeeee'

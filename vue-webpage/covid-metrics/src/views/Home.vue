@@ -51,4 +51,7 @@ p{
   text-decoration-color: #d52941 */
   /* border-bottom: 3px solid #23b5d3 */
 }
+#home{
+  padding-bottom: 15px;
+}
 </style>
