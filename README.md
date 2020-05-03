@@ -20,3 +20,11 @@ Technologies Used:
   * Vue.js
   * Vuex
   * Vue-router
+
+## metrics-api
+
+Uses the endpoints given by this web server to get the metrics from DynamoDB into the website. Check out the repository [here](https://github.com/jpoist97/metrics-api).
+
+Technologies Used:
+  * Express
+  * Node.js
