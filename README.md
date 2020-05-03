@@ -1,7 +1,7 @@
 # Covid-Metrics
 > Displays daily metrics on COVID-19 cases in the United States.
 
-Vue.js webpage that displays daily metrics on COVID-19 cases in the United States as reported by the CDC. The repository is brocken into the following two folders.
+Vue.js webpage that displays daily metrics on COVID-19 cases in the United States as reported by the CDC. The repository is brocken into the following two folders. You can find the live website [here](http://covid-metrics.s3-website-us-west-1.amazonaws.com/).
 
 ## aws-lambda
 
@@ -20,3 +20,12 @@ Technologies Used:
   * Vue.js
   * Vuex
   * Vue-router
+
+## metrics-api
+
+Uses the endpoints given by this web server to get the metrics from DynamoDB into the website. Check out the repository [here](https://github.com/jpoist97/metrics-api).
+
+Technologies Used:
+  * Express
+  * Node.js
+  * AWS Elastic Beanstalk
