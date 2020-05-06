@@ -14,6 +14,7 @@ exports.handler = async (event, context) => {
     
     // get the metrics from the past hour
     let metric = await getMetrics();
+    
 
     // for(let i = 0; i < metrics.length; i++){
     //     await storeMetrics(metrics[i]);
@@ -34,7 +35,9 @@ async function storeMetrics(metric){
         Item:{
             'date': metric.date,
             'cases': metric.cases,
-            'deaths': metric.deaths
+            'deaths': metric.deaths,
+            'active': metric.active,
+            'recovered': metric.recovered
         }
     }
 
@@ -48,16 +51,28 @@ async function storeMetrics(metric){
 
 async function getMetrics() {
 
-    let metric = [];
+    let metric;
 
     await axios.get(`https://api.covid19api.com/total/dayone/country/united-states`)
         .then(response => {
+            // for(let i = 0; i < response.data.length; i++){
+            //     metrics.push({                
+            //         date: response.data[i].Date.split('T')[0],
+            //         cases: response.data[i].Confirmed,
+            //         deaths: response.data[i].Deaths,
+            //         active: response.data[i].Active,
+            //         recovered: response.data[i].Recovered
+            //     });
+            // }
+
             let d = new Date(response.data[response.data.length-1].Date);
-            let date = `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`;
+            // let date = `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}`;
             metric= {
-                'date': date,
-                'cases': response.data[response.data.length-1].Confirmed,
-                'deaths': response.data[response.data.length-1].Deaths
+                date: response.data[response.data.length-1].Date.split('T')[0],
+                cases: response.data[response.data.length-1].Confirmed,
+                deaths: response.data[response.data.length-1].Deaths,
+                active: response.data[response.data.length-1].Active,
+                recovered: response.data[response.data.length-1].Recovered
             };
         })
         .catch(error => {
