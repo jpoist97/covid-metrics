@@ -6,7 +6,7 @@
         </div>
         <div v-else>
             <highcharts :options="graphOptions"/>
-            <p>This website displays daily figures for the number of Covid-19 cases in the United States. All statistics are pulled from <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a>. <br> Figures were made accessible by <a href="https://covid19api.com/#details">covid19api</a> written by Kyle Redelinghuys.</p>
+            <p>You can toggle the data shown by clicking on the legend. <br> This website displays daily figures for the number of Covid-19 cases in the United States. All statistics are pulled from <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a>. <br> Figures were made accessible by <a href="https://covid19api.com/#details">covid19api</a> written by Kyle Redelinghuys.</p>
         </div>
     </div>
 </template>
@@ -42,10 +42,10 @@ export default {
                           return `Deaths: ${ this.point.y }<br>Date: ${ d.toDateString() }`
                       }
                     },
-                    color: '#d52941'
+                    color: '#d52941',
                 },{
                     name: 'Cases',
-                    data: this.$store.state.covidData,
+                    data: this.$store.state.confirmedData,
                     tooltip: {
                       customTooltipPerSeries: function() {
                           let d = new Date(0);
@@ -54,6 +54,28 @@ export default {
                       }
                     },
                     color: '#fcab64'
+                },{
+                    name: 'Recovered',
+                    data: this.$store.state.recoveredData,
+                    tooltip: {
+                      customTooltipPerSeries: function() {
+                          let d = new Date(0);
+                          d.setUTCMilliseconds(this.point.x);
+                          return `Recovered: ${ this.point.y }<br>Date: ${ d.toDateString() }`
+                      }
+                    },
+                    color: '#7ae582'
+                },{
+                    name: 'Active',
+                    data: this.$store.state.activeData,
+                    tooltip: {
+                      customTooltipPerSeries: function() {
+                          let d = new Date(0);
+                          d.setUTCMilliseconds(this.point.x);
+                          return `Active: ${ this.point.y }<br>Date: ${ d.toDateString() }`
+                      }
+                    },
+                    color: '#23b5d3'
                 },
             ],
             yAxis: {
@@ -93,7 +115,14 @@ export default {
                 itemStyle: {
                     color: '#eeeeee'
                 }
+            },
+            plotOptions: {
+              series: {
+                marker: {
+                  enabled: false
+                }
             }
+    },
         },
         
     }

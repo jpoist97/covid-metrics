@@ -2,7 +2,7 @@
 <div class="home-navbar">
   <b-navbar toggleable="lg" class="light-blue" type="dark">
     <b-navbar-brand>
-      <router-link class="nav-link" :to="{ name: 'home' }">twitter metrics</router-link>
+      <router-link class="nav-link" :to="{ name: 'home' }">covid metrics</router-link>
     </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
